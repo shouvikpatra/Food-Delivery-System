@@ -1,3 +1,78 @@
 {% extends 'home/base.html' %} {% block content %}
-<h1>Home Page</h1>
+<br />
+<div class="text-center h1">WELCOME TO FOOD DELIVERY SYSTEM!</div>
+<br /><br />
+<div class="container login-container">
+  <div class="row d-flex justify-content-between">
+    <div class="col-md-5 restuarant-login">
+      <h3>Login for Restaurants</h3>
+      <br />
+      <form>
+        <div class="form-group">
+          <input
+            id="username_res"
+            type="text"
+            class="form-control"
+            placeholder="Enter Your Username"
+            value=""
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <input
+            id="password_res"
+            type="password"
+            class="form-control"
+            placeholder="Enter Your Password"
+            value=""
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <input type="submit" class="btnSubmit" value="Login" />
+        </div>
+        <br />
+        <div class="form-group">
+          <a href="#" class="register_res">New Restaurant? Register Here!</a>
+        </div>
+        <br />
+      </form>
+    </div>
+
+    <div class="col-md-5 customer-login">
+      <h3>Login for Customers</h3>
+      <br />
+      <form>
+        <div class="form-group">
+          <input
+            id="username_cus"
+            type="text"
+            class="form-control"
+            placeholder="Enter Your Username"
+            value=""
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <input
+            id="password_cus"
+            type="password"
+            class="form-control"
+            placeholder="Enter Your Password"
+            value=""
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <input type="submit" class="btnSubmit" value="Login" />
+        </div>
+        <br />
+        <div class="form-group">
+          <a href="#" class="register_cus">New Customer? Register Here!</a>
+        </div>
+        <br />
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}
