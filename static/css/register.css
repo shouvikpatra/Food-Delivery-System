@@ -36,3 +36,14 @@
   min-width: 140px;
   outline: none !important;
 }
+div.form-group input[type="text"] {
+  color: black;
+}
+
+div. form-group input[type="text"] {
+  color: back;
+}
+
+div. form-group input[type="password"] {
+  color: black;
+}

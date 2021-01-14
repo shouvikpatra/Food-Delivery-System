@@ -1,7 +1,9 @@
 {% extends 'home/base.html' %} {% block content %}
 
 <div class="signup-form">
-  <form action="#" method="post">
+  <form action="/customer-registration/" method="post">
+    {% csrf_token %}
+
     <h2>Customer Registration</h2>
 
     <div class="form-group">
@@ -11,7 +13,7 @@
             type="text"
             class="form-control"
             id="cus_name"
-            name="Customer_Name"
+            name="cus_name"
             placeholder="Customer Name"
             required="required"
           />
@@ -23,7 +25,7 @@
         type="address"
         class="form-control"
         id="cus_address"
-        name="address"
+        name="cus_address"
         placeholder="Address"
         required="required"
       />
@@ -32,7 +34,7 @@
       <input
         type="text"
         class="form-control"
-        name="contact"
+        name="cus_contact_number"
         id="cus_contact_number"
         placeholder="Contact Number"
         required="required"
@@ -43,7 +45,7 @@
         type="text"
         id="cus_username"
         class="form-control"
-        name="username"
+        name="cus_username"
         placeholder="Username"
         required="required"
       />
@@ -53,7 +55,7 @@
         type="password"
         class="form-control"
         id="cus_password"
-        name="password"
+        name="cus_password"
         placeholder="Password"
         required="required"
       />
@@ -63,7 +65,7 @@
         type="password"
         class="form-control"
         id="cus_confirm_password"
-        name="confirm_password"
+        name="cus_confirm_password"
         placeholder="Confirm Password"
         required="required"
       />

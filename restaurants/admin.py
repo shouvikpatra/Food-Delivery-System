@@ -3,7 +3,7 @@ from .models import *
 
 
 class RestaurantAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
+    list_display = ('id', 'name', 'username')
     exclude = ('id',)
 
 
