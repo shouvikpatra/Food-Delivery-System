@@ -7,8 +7,8 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=255, null=True)
     username = models.CharField(max_length=50, null=True)
     address = models.CharField(max_length=1500, null=True)
-    contact = models.IntegerField(max_length=10, null=True)
-    maxActiveOrders = models.IntegerField(max_length=100, null=True)
+    contact = models.IntegerField(null=True)
+    maxActiveOrders = models.IntegerField(null=True)
 
 
 class Menu(models.Model):

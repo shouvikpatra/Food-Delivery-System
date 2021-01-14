@@ -8,7 +8,7 @@ class RestaurantAdmin(admin.ModelAdmin):
 
 
 class MenuAdmin(admin.ModelAdmin):
-    list_display = ('id', 'res_id')
+    list_display = ('id', 'res_id', 'dish_name', 'price', 'availability')
     exclude = ('id',)
 
 

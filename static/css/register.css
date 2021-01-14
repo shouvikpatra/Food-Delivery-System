@@ -1,0 +1,38 @@
+.form-control {
+  height: 40px;
+  box-shadow: none;
+  color: #969fa4;
+}
+.form-control:focus {
+  border-color: #5cb85c;
+}
+.form-control .btn {
+  border-radius: 3px;
+}
+.signup-form {
+  width: 490px;
+  margin: 0 auto;
+  padding: 30px 0;
+  font-size: 15px;
+}
+.signup-form form {
+  color: #999;
+  padding: 30px;
+}
+.signup-form h2 {
+  color: #636363;
+  margin: 0 0 15px;
+  position: relative;
+  text-align: center;
+}
+
+.signup-form .form-group {
+  margin-bottom: 20px;
+}
+
+.signup-form .btn {
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 140px;
+  outline: none !important;
+}
