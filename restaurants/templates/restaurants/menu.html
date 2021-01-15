@@ -1,0 +1,59 @@
+{% extends 'restaurants/base.html' %} {% block content %}
+<div class="container col-md-3 h1">Restaurant Menu</div>
+<br />
+<div class="container col-md-6">
+  <table class="table table-light table-hover table-click active">
+    <thead>
+      <tr>
+        <th scope="col">Dish Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Cuisine</th>
+        <th scope="col">Availability</th>
+        <th scope="col">Update Details</th>
+        <th scope="col">Delete Item</th>
+      </tr>
+    </thead>
+    <tbody>
+      <form action="" method="post">
+        {%csrf_token%} {% for d in dishes%}
+        <tr>
+          <td>{{d.dish_name}}</td>
+          <td>{{d.price}}</td>
+          <td>{{d.cuisine}}</td>
+          <td>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                {%if d.availability%}
+                checked
+                {% endif %}
+                disabled
+              />
+            </div>
+          </td>
+          <td>
+            <div class="form-check">
+              <input
+                class="btn btn-success btn-sm btn-block"
+                type="submit"
+                value="Update Details"
+              />
+            </div>
+          </td>
+          <td>
+            <div class="form-check">
+              <input
+                class="btn btn-success btn-sm btn-block"
+                type="submit"
+                value="Delete"
+              />
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </form>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

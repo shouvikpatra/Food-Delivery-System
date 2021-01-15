@@ -1,0 +1,50 @@
+{% extends 'restaurants/base.html' %} {% block content %}
+
+  <div>
+  <div class="container col-md-6">
+    <table class="table table-light table-hover table-click active">
+      <thead>
+        <tr>
+          <th scope="col">Dish Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Cuisine</th>
+          <th scope="col">Availability</th>
+          <th scope="col">Get Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in dishes%}
+        <tr>
+          <td>{{d.dish_name}}</td>
+          <td>{{d.price}}</td>
+          <td>{{d.cuisine}}</td>
+          <td>
+            <div class="form-check">
+              <input
+              class="form-check-input"
+              type="checkbox"
+              {%if d.availability %}
+              checked
+              {%endif %}
+              disabled
+              />
+            </div>
+          </td>
+          <td>
+            <div class="form-check">
+              <input
+              class="btn btn-success btn-sm btn-block"
+              type="button"
+              value="Get Details"
+              />
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
+  </div>
+  {% endblock %}
+  
