@@ -9,7 +9,7 @@ from .forms import DishForm, ProfileForm
 
 def restaurant(response, rid):
     dishes = Menu.objects.all()
-    return render(response, 'restaurants/restaurant.html', {'dishes': dishes})
+    return render(response, 'restaurants/restaurant.html', {'dishes': dishes, 'rid': rid})
 
 
 def menu(response, rid):
@@ -62,7 +62,7 @@ def add_dish(response, rid):
             ins.save()
         return redirect('menu', rid=rid)
 
-    context = {'form': form}
+    context = {'form': form, 'rid': rid}
     return render(response, 'restaurants/dish.html', context)
 
 

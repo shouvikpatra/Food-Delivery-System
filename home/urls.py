@@ -10,7 +10,8 @@ urlpatterns = [
          name="customer-registration"),
     path('restaurant-registration/', views.resRegister,
          name="restaurant-registration"),
-    path('restaurant/', include('restaurants.urls'))
+    path('restaurant/', include('restaurants.urls')),
+    path('customer/', include('customers.urls')),
 
 
 ]
