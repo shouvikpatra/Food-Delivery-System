@@ -20,7 +20,8 @@ def menu(response, rid):
 def resProfile(response, rid):
     profile = Restaurant.objects.get(id=rid)
     form = ProfileForm(instance=profile)
-    context = {'form': form, 'rid': rid}
+    print(profile.username)
+    context = {'form': form, 'rid': rid, 'username': profile.username}
     return render(response, 'restaurants/myProfile.html', context)
 
 
@@ -41,7 +42,7 @@ def delete_res_profile(response, rid):
     print(profile.username)
     restaurant = User.objects.get(username=profile.username)
     print(restaurant.get_username())
-    if response.method=="POST":
+    if response.method == "POST":
         restaurant.delete()
         return redirect('home')
 

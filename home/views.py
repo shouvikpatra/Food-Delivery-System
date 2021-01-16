@@ -38,7 +38,7 @@ def resRegister(response):
             username=response.POST['res_username'], password=response.POST['res_password'])
         user.save()
 
-        ins = Restaurant(name=response.POST['res_name'], username=response.POST['res_username'], address=response.POST['res_address'],
+        ins = Restaurant(name=response.POST['res_name'], username=user, address=response.POST['res_address'],
                          contact=response.POST['res_contact_number'], maxActiveOrders=response.POST['res_max_active_order'])
         ins.save()
 
