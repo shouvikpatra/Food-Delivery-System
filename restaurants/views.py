@@ -43,8 +43,9 @@ def update_dish(response, rid, did):
 
 def delete_dish(response, rid, did):
     form = Menu.objects.get(id=did)
+    print(form.dish_name)
     if response.method == "POST":
         form.delete()
         return redirect('menu', rid=rid)
-    context = {'form': form}
+    context = {'delObject': form.dish_name, 'prevPage': "menu", 'id':rid}
     return render(response, 'restaurants/delete.html', context)
