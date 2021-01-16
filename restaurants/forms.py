@@ -1,8 +1,9 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, HiddenInput
 from .models import Menu
 
 
 class DishForm(ModelForm):
     class Meta:
         model = Menu
-        fields = ['dish_name', 'price', 'cuisine', 'availability']
+        fields = ['res_id', 'dish_name', 'price', 'cuisine', 'availability']
+        widgets = {'res_id': HiddenInput()}

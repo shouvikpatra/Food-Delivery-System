@@ -1,0 +1,21 @@
+{% extends 'restaurants/base.html' %}
+{% load static from static %}
+{% block content %}
+<form action="" method = "post">
+    {%csrf_token%}
+    <div class="container col-md-3" ><h1>Dish Details</h1>
+    <p><h4>Are you sure you want to Delete {{form.dish_name}}?<h4></p>
+    <p>
+    
+              <button 
+              class="btn ">
+                <a class="btn btn-success btn-sm btn-block" href="{% url 'menu' rid=form.res_id %}">
+                  Cancel
+                </a>
+        </button>
+            
+    
+<input type="submit" class="btn btn-success btn-sm btn-block" value="Confirm"></p></div>
+
+</form>
+{% endblock  %}

@@ -1,4 +1,5 @@
-{% extends 'restaurants/base.html' %} {% block content %}
+{% extends 'restaurants/base.html' %} 
+{% block content %}
 <div class="container col-md-3 h1">Restaurant Menu</div>
 <br />
 <div class="container col-md-6">
@@ -14,9 +15,11 @@
       </tr>
     </thead>
     <tbody>
+      
       <form action="" method="post">
         {%csrf_token%} {% for d in dishes%}
         <tr>
+          
           <td>{{d.dish_name}}</td>
           <td>{{d.price}}</td>
           <td>{{d.cuisine}}</td>
@@ -34,26 +37,32 @@
           </td>
           <td>
             <div class="form-check">
-              <input
-                class="btn btn-success btn-sm btn-block"
-                type="submit"
-                value="Update Details"
-              />
+              <button class="btn btn-success btn-sm btn-block">
+                <a class="btn btn-success btn-sm btn-block" href="{% url 'update_dish' rid=d.res_id did=d.id %}">
+                  UPDATE
+                </a>
             </div>
           </td>
           <td>
             <div class="form-check">
-              <input
-                class="btn btn-success btn-sm btn-block"
-                type="submit"
-                value="Delete"
-              />
+              <button 
+              class="btn btn-success btn-sm btn-block">
+                <a class="btn btn-success btn-sm btn-block" href="{% url 'delete_dish' rid=d.res_id did=d.id %}">
+                  DELETE
+                </a>
             </div>
           </td>
         </tr>
         {% endfor %}
-      </form>
+        
+      
     </tbody>
   </table>
+    </form>
+    <button class="btn btn-success btn-sm btn-block" >
+      <a class="btn btn-success btn-sm btn-block" href="{% url 'add_dish' rid=rid %}">
+        ADD ITEM
+      </a>
+    </button>
 </div>
 {% endblock %}

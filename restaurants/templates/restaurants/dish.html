@@ -2,7 +2,10 @@
 {% load static from static %}
 {% block content %}
 <form action="" method = "post">
-    {{form}}
-<input type="submit" class="btn" value="Submit">
+    {%csrf_token%}
+    <div class="container col-md-3" ><h1>Dish Details</h1>
+    {{form.as_p}}
+    
+<input type="submit" class="btn btn-success btn-sm btn-block" value="Submit"></div>
 </form>
 {% endblock  %}
