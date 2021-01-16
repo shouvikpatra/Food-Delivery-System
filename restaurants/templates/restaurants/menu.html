@@ -24,7 +24,7 @@
           <td>{{d.price}}</td>
           <td>{{d.cuisine}}</td>
           <td>
-            <div class="form-check">
+            
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -33,11 +33,11 @@
                 {% endif %}
                 disabled
               />
-            </div>
+            
           </td>
           <td>
             <div class="form-check">
-              <button class="btn btn-success btn-sm btn-block">
+              <button class="btn ">
                 <a class="btn btn-success btn-sm btn-block" href="{% url 'update_dish' rid=d.res_id did=d.id %}">
                   UPDATE
                 </a>
@@ -46,8 +46,8 @@
           <td>
             <div class="form-check">
               <button 
-              class="btn btn-success btn-sm btn-block">
-                <a class="btn btn-success btn-sm btn-block" href="{% url 'delete_dish' rid=d.res_id did=d.id %}">
+              class="btn ">
+                <a class="btn btn-danger btn-sm btn-block" href="{% url 'delete_dish' rid=d.res_id did=d.id %}">
                   DELETE
                 </a>
             </div>
@@ -59,7 +59,7 @@
     </tbody>
   </table>
     </form>
-    <button class="btn btn-success btn-sm btn-block" >
+    <button class="btn " >
       <a class="btn btn-success btn-sm btn-block" href="{% url 'add_dish' rid=rid %}">
         ADD ITEM
       </a>

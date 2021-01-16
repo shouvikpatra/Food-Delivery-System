@@ -4,12 +4,12 @@
 <form action="" method = "post">
     {%csrf_token%}
     
-    <div class="container col-md-3" ><h1>Dish Details</h1>
+    <div class="container col-md-3" ><h1>Confirmation Page</h1>
     <p><h4>Are you sure you want to Delete {{delObject}}?<h4></p>
     <p>
     
     <button class="btn ">
-        <a class="btn btn-success btn-sm btn-block" href="{% url prevPage id %}">
+        <a class="btn btn-danger btn-sm btn-block" href="{% url prevPage id %}">
                   Cancel
         </a>
         </button>
