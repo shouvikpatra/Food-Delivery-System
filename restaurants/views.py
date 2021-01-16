@@ -8,8 +8,9 @@ from .forms import DishForm, ProfileForm
 
 
 def restaurant(response, rid):
-    dishes = Menu.objects.all()
-    return render(response, 'restaurants/restaurant.html', {'dishes': dishes, 'rid': rid})
+    restaurant = Restaurant.objects.get(id=rid)
+    context = {'rid': rid, 'restaurant': restaurant}
+    return render(response, 'restaurants/restaurant.html', context)
 
 
 def menu(response, rid):

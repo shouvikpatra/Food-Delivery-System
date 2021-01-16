@@ -1,5 +1,5 @@
 from django.forms import ModelForm, HiddenInput
-from .models import Menu, Restaurant
+from .models import *
 
 
 class DishForm(ModelForm):

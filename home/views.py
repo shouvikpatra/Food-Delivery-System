@@ -22,7 +22,7 @@ def cusRegister(response):
             username=response.POST['cus_username'], password=response.POST['cus_password'])
         user.save()
 
-        ins = Customer(name=response.POST['cus_name'], username=response.POST['cus_username'], address=response.POST['cus_address'],
+        ins = Customer(name=response.POST['cus_name'], username=user, address=response.POST['cus_address'],
                        contact=response.POST['cus_contact_number'])
         ins.save()
 
