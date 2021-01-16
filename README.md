@@ -15,5 +15,5 @@ To download the latest version of Python, [click here](https://www.python.org/do
 * Now Open up your browser and go the the link: http://127.0.0.1:8000/
 * To access admin for this Django project, go to the link: http://127.0.0.1:8000/admin/</br>
 Username: admin <br>
-Password: password 
+Password: admin 
 * To stop the server, press the key combination: CTRL + C
