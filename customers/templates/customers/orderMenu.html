@@ -1,0 +1,52 @@
+{% extends 'customers/base.html' %} {% block content %}
+<div class="container">
+  <br />
+  <div class="text-center h2">{{restaurant.name}}'s Menu</div>
+  <br />
+  <div class="container col-md-6">
+    <form>
+      <div class="form-control">
+        <div class="row">
+          <div class="col col-md-auto">
+            Dish Name: {{menuFilter.form.dish_name}}
+          </div>
+          <div class="col col-md-auto">
+            Cuisine: {{menuFilter.form.cuisine}}
+          </div>
+          <div class="col col-md-auto">
+            <button class="btn btn-primary btn-sm btn-block" type="submit">
+              Filter
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="container col-md-6">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">Dish Name</th>
+          <th scope="col">Cuisine</th>
+          <th scope="col">Price</th>
+          <th scope="col">Add To Cart</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for dish in menu %}
+        <tr>
+          <td>{{dish.dish_name}}</td>
+          <td>{{dish.cuisine }}</td>
+          <td>{{dish.price }}</td>
+          <td>
+            <button type="submit" class="btn">
+              <a class="btn btn-success btn-sm btn-block" href="#">Add</a>
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

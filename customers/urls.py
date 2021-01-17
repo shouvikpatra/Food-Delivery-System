@@ -3,6 +3,10 @@ from . import views
 
 urlpatterns = [
     path('<int:cid>/', views.customer, name="customer"),
+    path('<int:cid>/showRestaurants/',
+         views.showRestaurants, name="showRestaurants"),
+    path('<int:cid>/showRestaurants/res<int:rid>/',
+         views.orderMenu, name="orderMenu"),
 
     # Profile Urls
     path('<int:cid>/myProfile/', views.cusProfile, name="cusProfile"),

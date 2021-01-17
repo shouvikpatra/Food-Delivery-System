@@ -14,7 +14,8 @@ def home(request):
 
 
 def about(request):
-    return render(request, 'home/about.html')
+    prefix = 'home/'
+    return render(request, prefix+'about.html')
 
 
 def cusRegister(response):

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'restaurants.apps.RestaurantsConfig',
     'customers.apps.CustomersConfig',
     'orders.apps.OrdersConfig',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
