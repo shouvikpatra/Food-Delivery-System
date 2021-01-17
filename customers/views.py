@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 # Create your views here.
 
 
+@login_required(login_url='home')
 def customer(response, cid):
     customer = Customer.objects.get(id=cid)
     print(type(customer.name))
@@ -14,6 +16,7 @@ def customer(response, cid):
     return render(response, 'customers/customer.html', context)
 
 
+@login_required(login_url='home')
 def cusProfile(response, cid):
     profile = Customer.objects.get(id=cid)
     form = ProfileForm(instance=profile)
@@ -21,6 +24,7 @@ def cusProfile(response, cid):
     return render(response, 'customers/myProfile.html', context)
 
 
+@login_required(login_url='home')
 def update_cus_profile(response, cid):
     profile = Customer.objects.get(id=cid)
     if response.method == "POST":
@@ -32,6 +36,7 @@ def update_cus_profile(response, cid):
     return redirect('cusProfile', cid=cid)
 
 
+@login_required(login_url='home')
 def delete_cus_profile(response, cid):
     profile = Customer.objects.get(id=cid)
     customer = User.objects.get(username=profile.username)

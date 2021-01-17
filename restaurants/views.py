@@ -1,24 +1,27 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import DishForm, ProfileForm
 
 
 # Create your views here.
 
-
+@login_required(login_url='home')
 def restaurant(response, rid):
     restaurant = Restaurant.objects.get(id=rid)
     context = {'rid': rid, 'restaurant': restaurant}
     return render(response, 'restaurants/restaurant.html', context)
 
 
+@login_required(login_url='home')
 def menu(response, rid):
     dishes = Menu.objects.filter(res_id=rid)
     return render(response, 'restaurants/menu.html', {'dishes': dishes, 'rid': rid})
 
 
+@login_required(login_url='home')
 def resProfile(response, rid):
     profile = Restaurant.objects.get(id=rid)
     form = ProfileForm(instance=profile)
@@ -27,6 +30,7 @@ def resProfile(response, rid):
     return render(response, 'restaurants/myProfile.html', context)
 
 
+@login_required(login_url='home')
 def update_res_profile(response, rid):
     profile = Restaurant.objects.get(id=rid)
     if response.method == "POST":
@@ -39,6 +43,7 @@ def update_res_profile(response, rid):
     return redirect('resProfile', rid=rid)
 
 
+@login_required(login_url='home')
 def delete_res_profile(response, rid):
     profile = Restaurant.objects.get(id=rid)
     print(profile.username)
@@ -55,6 +60,7 @@ def delete_res_profile(response, rid):
 # MENU FUNCTIONALITITES
 
 
+@login_required(login_url='home')
 def add_dish(response, rid):
     form = DishForm(initial={'res_id': rid})
 
@@ -68,6 +74,7 @@ def add_dish(response, rid):
     return render(response, 'restaurants/dish.html', context)
 
 
+@login_required(login_url='home')
 def update_dish(response, rid, did):
     dish = Menu.objects.get(id=did)
     form = DishForm(instance=dish)
@@ -80,6 +87,7 @@ def update_dish(response, rid, did):
     return render(response, 'restaurants/dish.html', context)
 
 
+@login_required(login_url='home')
 def delete_dish(response, rid, did):
     form = Menu.objects.get(id=did)
     print(form.dish_name)
