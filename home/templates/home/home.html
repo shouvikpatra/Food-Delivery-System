@@ -7,31 +7,32 @@
     <div class="col-md-5 restuarant-login">
       <h3>Login for Restaurants</h3>
       <br />
-      <form>
+      <form action="{%url 'reslogin'%}" method="post">
         <div class="form-group">
+          {% csrf_token %}
           <input
             id="username_res"
+            name="username_res"
             type="text"
             class="form-control"
             placeholder="Enter Your Username"
-            value=""
           />
         </div>
         <br />
         <div class="form-group">
           <input
             id="password_res"
+            name="password_res"
             type="password"
             class="form-control"
             placeholder="Enter Your Password"
-            value=""
           />
         </div>
         <br />
         <div class="form-group">
           <input
             type="submit"
-            class="btn btn-success btn-lg btn-block"
+            class="btn btn-primary btn-lg btn-block"
             value="Login"
           />
         </div>
@@ -48,31 +49,32 @@
     <div class="col-md-5 customer-login">
       <h3>Login for Customers</h3>
       <br />
-      <form>
+      <form action="{%url 'cuslogin'%}" method="post">
+        {% csrf_token %}
         <div class="form-group">
           <input
             id="username_cus"
+            name="username_cus"
             type="text"
             class="form-control"
             placeholder="Enter Your Username"
-            value=""
           />
         </div>
         <br />
         <div class="form-group">
           <input
             id="password_cus"
+            name="password_cus"
             type="password"
             class="form-control"
             placeholder="Enter Your Password"
-            value=""
           />
         </div>
         <br />
         <div class="form-group">
           <input
             type="submit"
-            class="btn btn-success btn-lg btn-block"
+            class="btn btn-primary btn-lg btn-block"
             value="Login"
           />
         </div>

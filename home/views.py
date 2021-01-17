@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from restaurants.models import Restaurant
 from customers.models import Customer
@@ -45,3 +46,38 @@ def resRegister(response):
         return redirect('/')
 
     return render(response, 'home/resRegister.html')
+
+
+def reslogin(response):
+    if response.method == "POST":
+        username = response.POST.get('username_res')
+        password = response.POST.get('password_res')
+        user = authenticate(response, username=username, password=password)
+        print(user)
+        if user is not None:
+            print(user)
+            login(response, user)
+            res_user = User.objects.get(username=username)
+            rid = Restaurant.objects.get(username=res_user).id
+            return redirect('restaurant', rid=rid)
+    return redirect('home')
+
+
+def cuslogin(response):
+    if response.method == "POST":
+        username = response.POST.get('username_cus')
+        password = response.POST.get('password_cus')
+        user = authenticate(response, username=username, password=password)
+        print(user)
+
+        if user is not None:
+            login(response, user)
+            cus_user = User.objects.get(username=username)
+            cid = Customer.objects.get(username=cus_user).id
+            return redirect('customer', cid=cid)
+    return redirect('home')
+
+
+def logoutUser(response):
+    logout(response)
+    return redirect('home')
