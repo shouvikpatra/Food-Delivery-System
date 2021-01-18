@@ -33,48 +33,50 @@
         data-bs-parent="#accordionExample"
       >
         <div class="accordion-body">
-          <div id="customer_details" class="col">
-            <div class="text-left h5">YOUR DETAILS</div>
-            <table class="cus_details">
-              <thead>
-                <tr>
-                  <th id="cus_name" scope="col">Name: {{customer.name}}</th>
-                </tr>
-                <tr>
-                  <th id="cus_address" scope="col">
-                    Address: {{customer.address}}
-                  </th>
-                </tr>
-                <tr>
-                  <th id="cus_contact" scope="col">
-                    Contact: {{customer.contact}}
-                  </th>
-                </tr>
-              </thead>
-            </table>
-          </div>
+          <div class="row">
+            <div id="customer_details" class="col">
+              <div class="text-left h5">YOUR DETAILS</div>
+              <table class="cus_details">
+                <thead>
+                  <tr>
+                    <th id="cus_name" scope="col">Name: {{customer.name}}</th>
+                  </tr>
+                  <tr>
+                    <th id="cus_address" scope="col">
+                      Address: {{customer.address}}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th id="cus_contact" scope="col">
+                      Contact: {{customer.contact}}
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
 
-          <div id="restaurant_details" class="col">
-            <div class="text-left h5">RESTAURANT DETAILS</div>
-            <table class="res_details">
-              <thead>
-                <tr>
-                  <th id="res_name" scope="col">
-                    Restaurant Name: {{order.restaurant.name}}
-                  </th>
-                </tr>
-                <tr>
-                  <th id="res_address" scope="col">
-                    Address: {{order.restaurant.address}}
-                  </th>
-                </tr>
-                <tr>
-                  <th id="res_contact" scope="col">
-                    Contact: {{order.restaurant.contact}}
-                  </th>
-                </tr>
-              </thead>
-            </table>
+            <div id="restaurant_details" class="col">
+              <div class="text-left h5">RESTAURANT DETAILS</div>
+              <table class="res_details">
+                <thead>
+                  <tr>
+                    <th id="res_name" scope="col">
+                      Restaurant Name: {{order.restaurant.name}}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th id="res_address" scope="col">
+                      Address: {{order.restaurant.address}}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th id="res_contact" scope="col">
+                      Contact: {{order.restaurant.contact}}
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
           </div>
 
           <hr />

@@ -1,21 +1,14 @@
-{% extends 'customers/base.html' %} {% block content %} {% load custom_tags %}
+{% extends 'restaurants/base.html' %} {% block content %} {% load custom_tags %}
 <div class="container col-md-9">
   <br />
-  <div class="container col-md-3 h2">MY ORDERS</div>
+  <div class="container col-md-3 h2">ALL ORDERS</div>
   <br />
-  <table class="table col-md-6">
-    <tr>
-      <th scope="col">Order ID</th>
-      <th scope="col">Restaurant</th>
-      <th scope="col">Status</th>
-    </tr>
-  </table>
-  {% for order in orders %}
+  {% if orders %} {% for order in orders %}
   <div class="accordion" id="accordionExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="heading{{order.id}}">
         <button
-          class="accordion-button"
+          class="accordion-button btn-success"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#collapse{{order.id}}"
@@ -25,7 +18,7 @@
           <div class="container">
             <div class="row">
               <div class="col-sm-3 h4">Order ID: #{{order.id}}</div>
-              <div class="col-sm-3 h4">{{order.restaurant.name}}</div>
+              <div class="col-sm-3 h4">{{order.customer.name}}</div>
               <div class="col-sm-4 h4">Status: {{order.status}}</div>
             </div>
           </div>
@@ -40,20 +33,20 @@
         <div class="accordion-body">
           <div class="row">
             <div id="customer_details" class="col">
-              <div class="text-left h5">YOUR DETAILS</div>
+              <div class="text-left h6">{{restaurant.name}} DETAILS</div>
               <table class="cus_details">
                 <thead>
                   <tr>
-                    <th id="cus_name" scope="col">Name: {{customer.name}}</th>
+                    <th id="cus_name" scope="col">Name: {{restaurant.name}}</th>
                   </tr>
                   <tr>
                     <th id="cus_address" scope="col">
-                      Address: {{customer.address}}
+                      Address: {{restaurant.address}}
                     </th>
                   </tr>
                   <tr>
                     <th id="cus_contact" scope="col">
-                      Contact: {{customer.contact}}
+                      Contact: {{restaurant.contact}}
                     </th>
                   </tr>
                 </thead>
@@ -61,29 +54,28 @@
             </div>
 
             <div id="restaurant_details" class="col">
-              <div class="text-left h5">RESTAURANT DETAILS</div>
+              <div class="text-left h6">CUSTOMER DETAILS</div>
               <table class="res_details">
                 <thead>
                   <tr>
                     <th id="res_name" scope="col">
-                      Restaurant Name: {{order.restaurant.name}}
+                      Restaurant Name: {{order.customer.name}}
                     </th>
                   </tr>
                   <tr>
                     <th id="res_address" scope="col">
-                      Address: {{order.restaurant.address}}
+                      Address: {{order.customer.address}}
                     </th>
                   </tr>
                   <tr>
                     <th id="res_contact" scope="col">
-                      Contact: {{order.restaurant.contact}}
+                      Contact: {{order.customer.contact}}
                     </th>
                   </tr>
                 </thead>
               </table>
             </div>
           </div>
-
           <hr />
 
           <table class="table table-striped table-hover">
@@ -112,9 +104,16 @@
               </tr>
             </tbody>
           </table>
+          <div class="d-grid gap-2 btn-success">
+            <a class="d-grid gap-2 btn btn-success btn-sm btn-block" href="#"
+              ><h6>UPDATE STATUS</h6></a
+            >
+          </div>
         </div>
       </div>
     </div>
   </div>
-  {% endfor %} {% endblock %}
+  {% endfor %} {% else %}
+  <div class="text-center h4">NO ACTIVE ORDERS</div>
+  {% endif %} {% endblock %}
 </div>

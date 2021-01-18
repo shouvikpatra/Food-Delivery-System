@@ -18,6 +18,15 @@ def restaurant(response, rid):
     return render(response, 'restaurants/restaurant.html', context)
 
 
+def resOrderPage(response, rid):
+    restaurant = Restaurant.objects.get(id=rid)
+    orders = Order.objects.filter(restaurant_id=rid)
+
+    context = {'rid': rid, 'restaurant': restaurant,
+               'orders': orders, }
+    return render(response, 'restaurants/orderPage.html', context)
+
+
 @login_required(login_url='home')
 def menu(response, rid):
     dishes = Menu.objects.filter(res_id=rid)
@@ -57,7 +66,7 @@ def delete_res_profile(response, rid):
         return redirect('home')
 
     context = {'delObject': 'your Profile, ' +
-               profile.name, 'prevPage': "resProfile", 'id': rid}
+               profile.name, 'prevPage': "resProfile", 'id': rid, 'rid': rid}
     return render(response, 'restaurants/delete.html', context)
 
 # MENU FUNCTIONALITITES
@@ -86,7 +95,7 @@ def update_dish(response, rid, did):
         if upd.is_valid():
             upd.save()
         return redirect('menu', rid=rid)
-    context = {'form': form}
+    context = {'form': form, 'rid': rid}
     return render(response, 'restaurants/dish.html', context)
 
 
@@ -97,5 +106,6 @@ def delete_dish(response, rid, did):
     if response.method == "POST":
         form.delete()
         return redirect('menu', rid=rid)
-    context = {'delObject': form.dish_name, 'prevPage': "menu", 'id': rid}
+    context = {'delObject': form.dish_name,
+               'prevPage': "menu", 'id': rid, 'rid': rid}
     return render(response, 'restaurants/delete.html', context)

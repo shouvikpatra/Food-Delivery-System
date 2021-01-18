@@ -3,6 +3,8 @@ from . import views
 
 urlpatterns = [
     path('<int:rid>/', views.restaurant, name="restaurant"),
+    # Order URLs
+    path('<int:rid>/myOrders/', views.resOrderPage, name="resOrderPage"),
 
 
     # Menu URLs
@@ -20,7 +22,6 @@ urlpatterns = [
     path('<int:rid>/myProfile/delete',
          views.delete_res_profile, name="delete_res_profile"),
 
-    # Order URLs
 
 
 

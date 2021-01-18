@@ -1,8 +1,11 @@
 {% extends 'restaurants/base.html' %} {% block content %} {% load custom_tags %}
 <div class="container col-md-6">
   <br />
-  <div class="text-center h5">Welcome {{restaurant.name}}!</div>
-  {% if orders %} {% for order in orders %}
+  <div class="text-center h2">Welcome {{restaurant.name}}!</div>
+  <br />
+  {% if orders %}
+  <div class="h4">HERE ARE YOU CURRENT ACTIVE ORDERS!</div>
+  {% for order in orders %}
   <div class="accordion" id="accordionExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="heading{{order.id}}">
@@ -105,15 +108,15 @@
               </tr>
             </tbody>
           </table>
-          <div class="d-grid gap-2 btn-success">
-            <a class="d-grid gap-2 btn btn-success btn-sm btn-block" href="#"
-              ><h6>UPDATE STATUS</h6></a
-            >
-          </div>
+
+          <a class="d-grid gap-2 btn btn-success btn-sm btn-block" href="#"
+            ><h4>UPDATE STATUS</h4></a
+          >
         </div>
       </div>
     </div>
   </div>
+
   {% endfor %} {% else %}
   <div class="text-center h4">NO ACTIVE ORDERS</div>
   {% endif %} {% endblock %}
