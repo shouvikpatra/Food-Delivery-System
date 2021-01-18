@@ -29,7 +29,7 @@
           <th scope="col">Dish Name</th>
           <th scope="col">Cuisine</th>
           <th scope="col">Price</th>
-          <th scope="col">Add To Cart</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -38,9 +38,14 @@
           <td>{{dish.dish_name}}</td>
           <td>{{dish.cuisine }}</td>
           <td>{{dish.price }}</td>
+
           <td>
             <button type="submit" class="btn">
-              <a class="btn btn-success btn-sm btn-block" href="#">Add</a>
+              <a
+                class="btn btn-success btn-sm btn-block"
+                href="{%url 'add_to_cart' cid=cid rid=rid did=dish.id%}"
+                >ADD TO CART</a
+              >
             </button>
           </td>
         </tr>

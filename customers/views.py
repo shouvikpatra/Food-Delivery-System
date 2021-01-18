@@ -29,13 +29,62 @@ def showRestaurants(response, cid):
 
 
 def orderMenu(response, cid, rid):
+    cart = Cart.objects.filter(customer_id=cid)
+    dishes = []
+    for c in cart:
+        dishes = Menu.objects.get(id=c.dish.id)
     restaurant = Restaurant.objects.get(id=rid)
     menu = Menu.objects.filter(res_id=restaurant, availability=True)
     menuFilter = MenuFilter(response.GET, queryset=menu)
     menu = menuFilter.qs
     context = {'cid': cid, 'restaurant': restaurant,
-               'menu': menu, 'menuFilter': menuFilter}
+               'menu': menu, 'menuFilter': menuFilter, 'rid': rid, 'cart': dishes}
     return render(response, 'customers/orderMenu.html', context)
+
+
+def myCart(response, cid):
+    customer = Customer.objects.get(id=cid)
+    cartItems = Cart.objects.filter(customer=customer)
+    restaurant = None
+    total = None
+    if cartItems.first():
+        restaurant = cartItems.first().restaurant
+        total = 0
+        for c in cartItems:
+            total += (c.dish.price*c.quantity)
+
+    context = {'cid': cid, 'customer': customer,
+               'restaurant': restaurant, 'cartItems': cartItems, 'totalprice': total}
+    return render(response, 'customers/myCart.html', context)
+
+
+def add_to_cart(response, cid, rid, did):
+    customer = Customer.objects.get(id=cid)
+    restaurant = Restaurant.objects.get(id=rid)
+    dish = Menu.objects.get(id=did)
+    cartItem = Cart(customer=customer, restaurant=restaurant, dish=dish)
+    cartItem.save()
+    return redirect('orderMenu', cid=cid, rid=rid)
+
+
+def inc_quantity(response, cid, did):
+    cartItem = Cart.objects.get(id=did)
+    if cartItem.dish.availability == True:
+        cartItem.quantity += 1
+        cartItem.save()
+    else:
+        cartItem.delete()
+    return redirect('myCart', cid=cid)
+
+
+def dcr_quantity(response, cid, did):
+    cartItem = Cart.objects.get(id=did)
+    cartItem.quantity -= 1
+    if cartItem.dish.availability == False or cartItem.quantity == 0:
+        cartItem.delete()
+    else:
+        cartItem.save()
+    return redirect('myCart', cid=cid)
 
 # Profile Options
 @login_required(login_url='home')

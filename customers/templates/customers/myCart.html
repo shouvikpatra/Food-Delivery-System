@@ -1,0 +1,109 @@
+{% extends 'customers/base.html' %} {% block content %} {% load custom_tags %}
+<div class="container col-md-6">
+  <br />
+  <div class="text-center h2">My Cart</div>
+  <hr />
+  {% if restaurant %}
+  <div id="order_details">
+    <div class="row">
+      <div id="customer_details" class="col">
+        <div class="text-left h4">YOUR DETAILS</div>
+        <table class="cus_details">
+          <thead>
+            <tr>
+              <th id="cus_name" scope="col">Name: {{customer.name}}</th>
+            </tr>
+            <tr>
+              <th id="cus_address" scope="col">
+                Address: {{customer.address}}
+              </th>
+            </tr>
+            <tr>
+              <th id="cus_contact" scope="col">
+                Contact: {{customer.contact}}
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div id="restaurant_details" class="col">
+        <div class="text-left h4">RESTAURANT DETAILS</div>
+        <table class="res_details">
+          <thead>
+            <tr>
+              <th id="res_name" scope="col">
+                Restaurant Name: {{restaurant.name}}
+              </th>
+            </tr>
+            <tr>
+              <th id="res_address" scope="col">
+                Address: {{restaurant.address}}
+              </th>
+            </tr>
+            <tr>
+              <th id="res_contact" scope="col">
+                Contact: {{restaurant.contact}}
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+    <hr />
+
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Dish Name</th>
+          <th scope="col">Dish Price</th>
+          <th scope="col">Dish Quantity</th>
+          <th scope="col">Total Dish Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in cartItems %}
+        <tr>
+          <td>{{d.dish.dish_name}}</td>
+
+          <td>{{d.dish.price}}</td>
+          <td>
+            <button type="submit" class="btn">
+              <a
+                class="btn btn-danger btn-sm btn-block"
+                href="{%url 'dcr_quantity' cid=cid did=d.id%}"
+              >
+                -
+              </a>
+            </button>
+            {{d.quantity}}<button type="submit" class="btn">
+              <a
+                class="btn btn-success btn-sm btn-block"
+                href="{%url 'inc_quantity' cid=cid did=d.id%}"
+              >
+                +
+              </a>
+            </button>
+          </td>
+          <td>{{d.dish.price|multiply:d.quantity}}</td>
+        </tr>
+        {% endfor %}
+
+        <tr class="table-dark">
+          <th colspan="3">Grand Total</th>
+          <th>{{totalprice}}</th>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-grid gap-2 btn-success">
+      <a class="d-grid gap-2 btn btn-success btn-sm btn-block" href="#"
+        ><h4>Place Order</h4></a
+      >
+    </div>
+    {% else %}
+
+    <div class="text-center h4">Your Cart is Empty</div>
+  </div>
+</div>
+{% endif %} {% endblock %}

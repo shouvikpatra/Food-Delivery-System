@@ -7,13 +7,10 @@ class CustomerAdmin(admin.ModelAdmin):
     exclude = ('id',)
 
 
-'''
 class CartAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'username')
-    exclude = ('id',)
-'''
+    list_display = ('id', 'dish', 'quantity')
 
 
 # Register your models here.
 admin.site.register(Customer, CustomerAdmin)
-#admin.site.register(Cart, CartAdmin)
+admin.site.register(Cart, CartAdmin)
