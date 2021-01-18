@@ -1,4 +1,4 @@
-{% extends 'customers/base.html' %} {% block content %}
+{% extends 'customers/base.html' %} {% block content %} {% load custom_tags %}
 <div class="container">
   <br />
   <div class="text-center h2">{{restaurant.name}}'s Menu</div>
@@ -44,8 +44,9 @@
               <a
                 class="btn btn-success btn-sm btn-block"
                 href="{%url 'add_to_cart' cid=cid rid=rid did=dish.id%}"
-                >ADD TO CART</a
               >
+                ADD TO CART
+              </a>
             </button>
           </td>
         </tr>

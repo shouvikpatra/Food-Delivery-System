@@ -13,15 +13,10 @@ from .filters import *
 @login_required(login_url='home')
 def customer(response, cid):
     customer = Customer.objects.get(id=cid)
-    orders = Order.objects.get(customer=customer, order_activity=True)
-    orderList = OrderList.objects.filter(order=orders)
-    restaurant = orders.restaurant
-    total = 0
-    for d in orderList:
-        total += (d.dish.price*d.quantity)
+    orders = Order.objects.filter(customer_id=cid, order_activity=True)
 
     context = {'cid': cid, 'customer': customer,
-               'orders': orders, 'orderList': orderList, 'total': total}
+               'orders': orders, }
     return render(response, 'customers/customer.html', context)
 
 
@@ -85,6 +80,16 @@ def inc_quantity(response, cid, did):
     return redirect('myCart', cid=cid)
 
 
+def inc_quantity_m(response, cid, rid, did):
+    cartItem = Cart.objects.get(id=did)
+    if cartItem.dish.availability == True:
+        cartItem.quantity += 1
+        cartItem.save()
+    else:
+        cartItem.delete()
+    return redirect('orderMenu', cid=cid, rid=rid)
+
+
 def dcr_quantity(response, cid, did):
     cartItem = Cart.objects.get(id=did)
     cartItem.quantity -= 1
@@ -93,6 +98,16 @@ def dcr_quantity(response, cid, did):
     else:
         cartItem.save()
     return redirect('myCart', cid=cid)
+
+
+def dcr_quantity_m(response, cid, rid, did):
+    cartItem = Cart.objects.get(id=did)
+    cartItem.quantity -= 1
+    if cartItem.dish.availability == False or cartItem.quantity == 0:
+        cartItem.delete()
+    else:
+        cartItem.save()
+    return redirect('orderMenu', cid=cid, rid=rid)
 
 
 def placeOrder(response, cid):
@@ -148,3 +163,12 @@ def delete_cus_profile(response, cid):
     context = {'delObject': 'your Profile, ' +
                profile.name, 'prevPage': "cusProfile", 'id': cid, 'cid': cid}
     return render(response, 'customers/delete.html', context)
+
+
+def cusOrderPage(response, cid):
+    customer = Customer.objects.get(id=cid)
+    orders = Order.objects.filter(customer_id=cid)
+
+    context = {'cid': cid, 'customer': customer,
+               'orders': orders, }
+    return render(response, 'customers/orderPage.html', context)

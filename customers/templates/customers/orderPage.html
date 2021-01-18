@@ -1,9 +1,16 @@
 {% extends 'customers/base.html' %} {% block content %} {% load custom_tags %}
 <div class="container col-md-6">
   <br />
-  <div class="text-center h4">Welcome {{customer.name}}!</div>
+  <div class="container col-md-4 h2">MY ORDERS</div>
   <br />
-  {% if orders %} {% for order in orders %}
+  <table class="table col-md-6">
+    <tr>
+      <th scope="col">Order ID</th>
+      <th scope="col">Restaurant</th>
+      <th scope="col">Status</th>
+    </tr>
+  </table>
+  {% for order in orders %}
   <div class="accordion" id="accordionExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="heading{{order.id}}">
@@ -109,8 +116,5 @@
       </div>
     </div>
   </div>
-  {% endfor %} {% else %}
-  <div class="text-center h4">NO ACTIVE ORDERS</div>
-  {% endif %}
+  {% endfor %} {% endblock %}
 </div>
-{% endblock %}

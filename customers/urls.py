@@ -12,15 +12,22 @@ urlpatterns = [
          views.orderMenu, name="orderMenu"),
     path('<int:cid>/showRestaurants/res<int:rid>/dish_add<int:did>/',
          views.add_to_cart, name="add_to_cart"),
+    path('<int:cid>/showRestaurants/res<int:rid>/dish_inc<int:did>/',
+         views.inc_quantity_m, name="inc_quantity_m"),
+    path('<int:cid>/showRestaurants/res<int:rid>//dish_dcr<int:did>/',
+         views.dcr_quantity_m, name="dcr_quantity_m"),
+
+
     # My Cart Tab
     path('<int:cid>/myCart/', views.myCart, name="myCart"),
     path('<int:cid>/myCart/dish<int:did>/inc',
          views.inc_quantity, name="inc_quantity"),
     path('<int:cid>/myCart/dish<int:did>/dcr',
          views.dcr_quantity, name="dcr_quantity"),
+    path('<int:cid>/myCart/placeOrder/', views.placeOrder, name="placeOrder"),
 
     # Order
-    path('<int:cid>/myCart/placeOrder/', views.placeOrder, name="placeOrder"),
+    path('<int:cid>/myOrders/', views.cusOrderPage, name="cusOrderPage"),
 
 
     # Profile Urls
