@@ -19,6 +19,9 @@ urlpatterns = [
     path('<int:cid>/myCart/dish<int:did>/dcr',
          views.dcr_quantity, name="dcr_quantity"),
 
+    # Order
+    path('<int:cid>/myCart/placeOrder/', views.placeOrder, name="placeOrder"),
+
 
     # Profile Urls
     path('<int:cid>/myProfile/', views.cusProfile, name="cusProfile"),

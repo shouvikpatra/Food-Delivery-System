@@ -15,14 +15,14 @@ class Order(models.Model):
         "restaurants.Restaurant", null=True, on_delete=models.SET_NULL)
     customer = models.ForeignKey(
         "customers.Customer", null=True, on_delete=models.SET_NULL)
-    status = models.CharField(max_length=60, choices=category)
-    order_activity = models.CharField(max_length=60, choices=(
-        ('Active', 'Active'), ('Inactive', 'Inactive')))
+    status = models.CharField(
+        max_length=60, choices=category, default=category[0][0])
+    order_activity = models.BooleanField(default=True)
 
 
 class OrderList(models.Model):
-    order_id = models.ForeignKey(
+    order = models.ForeignKey(
         "Order", null=True, on_delete=models.SET_NULL)
-    dish_id = models.ForeignKey(
+    dish = models.ForeignKey(
         "restaurants.Menu", null=True, on_delete=models.SET_NULL)
-    dish_quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(default=1)

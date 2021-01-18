@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import *
 from restaurants.models import *
+from orders.models import *
 from .forms import *
 from .filters import *
 # Create your views here.
@@ -12,8 +13,15 @@ from .filters import *
 @login_required(login_url='home')
 def customer(response, cid):
     customer = Customer.objects.get(id=cid)
+    orders = Order.objects.get(customer=customer, order_activity=True)
+    orderList = OrderList.objects.filter(order=orders)
+    restaurant = orders.restaurant
+    total = 0
+    for d in orderList:
+        total += (d.dish.price*d.quantity)
 
-    context = {'cid': cid, 'customer': customer, }
+    context = {'cid': cid, 'customer': customer,
+               'orders': orders, 'orderList': orderList, 'total': total}
     return render(response, 'customers/customer.html', context)
 
 
@@ -85,6 +93,28 @@ def dcr_quantity(response, cid, did):
     else:
         cartItem.save()
     return redirect('myCart', cid=cid)
+
+
+def placeOrder(response, cid):
+
+    cart = Cart.objects.filter(customer_id=cid)
+    itemsAvailable = True
+    for item in cart:
+        if not item.dish.availability:
+            itemsAvailable = False
+            break
+    if itemsAvailable:
+        restaurant = cart.first().restaurant
+        order = Order(customer_id=cid, restaurant=restaurant)
+        order.save()
+        for item in cart:
+            orderListItem = OrderList(
+                order=order, dish=item.dish, quantity=item.quantity)
+            orderListItem.save()
+    cart.delete()
+
+    return redirect('customer', cid=cid)
+
 
 # Profile Options
 @login_required(login_url='home')
