@@ -20,6 +20,7 @@ def customer(response, cid):
     return render(response, 'customers/customer.html', context)
 
 
+@login_required(login_url='home')
 def showRestaurants(response, cid):
     customer = Customer.objects.get(id=cid)
     restaurants = Restaurant.objects.all()
@@ -31,6 +32,7 @@ def showRestaurants(response, cid):
     return render(response, 'customers/showRestaurants.html', context)
 
 
+@login_required(login_url='home')
 def orderMenu(response, cid, rid):
     cart = Cart.objects.filter(customer_id=cid)
     dishes = []
@@ -45,6 +47,7 @@ def orderMenu(response, cid, rid):
     return render(response, 'customers/orderMenu.html', context)
 
 
+@login_required(login_url='home')
 def myCart(response, cid):
     customer = Customer.objects.get(id=cid)
     cartItems = Cart.objects.filter(customer=customer)
@@ -61,6 +64,7 @@ def myCart(response, cid):
     return render(response, 'customers/myCart.html', context)
 
 
+@login_required(login_url='home')
 def add_to_cart(response, cid, rid, did):
     customer = Customer.objects.get(id=cid)
     restaurant = Restaurant.objects.get(id=rid)
@@ -70,6 +74,7 @@ def add_to_cart(response, cid, rid, did):
     return redirect('orderMenu', cid=cid, rid=rid)
 
 
+@login_required(login_url='home')
 def inc_quantity(response, cid, did):
     cartItem = Cart.objects.get(id=did)
     if cartItem.dish.availability == True:
@@ -80,6 +85,7 @@ def inc_quantity(response, cid, did):
     return redirect('myCart', cid=cid)
 
 
+@login_required(login_url='home')
 def inc_quantity_m(response, cid, rid, did):
     cartItem = Cart.objects.get(id=did)
     if cartItem.dish.availability == True:
@@ -90,6 +96,7 @@ def inc_quantity_m(response, cid, rid, did):
     return redirect('orderMenu', cid=cid, rid=rid)
 
 
+@login_required(login_url='home')
 def dcr_quantity(response, cid, did):
     cartItem = Cart.objects.get(id=did)
     cartItem.quantity -= 1
@@ -100,6 +107,7 @@ def dcr_quantity(response, cid, did):
     return redirect('myCart', cid=cid)
 
 
+@login_required(login_url='home')
 def dcr_quantity_m(response, cid, rid, did):
     cartItem = Cart.objects.get(id=did)
     cartItem.quantity -= 1
@@ -110,6 +118,7 @@ def dcr_quantity_m(response, cid, rid, did):
     return redirect('orderMenu', cid=cid, rid=rid)
 
 
+@login_required(login_url='home')
 def placeOrder(response, cid):
 
     cart = Cart.objects.filter(customer_id=cid)
@@ -165,6 +174,7 @@ def delete_cus_profile(response, cid):
     return render(response, 'customers/delete.html', context)
 
 
+@login_required(login_url='home')
 def cusOrderPage(response, cid):
     customer = Customer.objects.get(id=cid)
     orders = Order.objects.filter(customer_id=cid)

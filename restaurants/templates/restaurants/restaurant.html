@@ -109,7 +109,9 @@
             </tbody>
           </table>
 
-          <a class="d-grid gap-2 btn btn-success btn-sm btn-block" href="#"
+          <a
+            class="d-grid gap-2 btn btn-success btn-sm btn-block"
+            href="{% url 'updateOrder' rid=rid oid=order.id %}"
             ><h4>UPDATE STATUS</h4></a
           >
         </div>

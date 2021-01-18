@@ -18,6 +18,7 @@ def restaurant(response, rid):
     return render(response, 'restaurants/restaurant.html', context)
 
 
+@login_required(login_url='home')
 def resOrderPage(response, rid):
     restaurant = Restaurant.objects.get(id=rid)
     orders = Order.objects.filter(restaurant_id=rid)
@@ -25,6 +26,27 @@ def resOrderPage(response, rid):
     context = {'rid': rid, 'restaurant': restaurant,
                'orders': orders, }
     return render(response, 'restaurants/orderPage.html', context)
+
+
+@login_required(login_url='home')
+def updateOrder(response, rid, oid):
+    order = Order.objects.get(id=oid)
+    form = OrderForm(instance=order)
+    restaurant = order.restaurant
+    customer = order.customer
+    if response.method == "POST":
+        order.status = response.POST['status']
+        if response.POST['status'] == 'Delivered' or response.POST['status'] == 'Cancelled':
+            order.order_activity = False
+            # Contraint Code
+        else:
+            order.order_activity = True
+        order.save()
+        return redirect('resOrderPage', rid=rid)
+
+    context = {'rid': rid, 'oid': oid, 'form': form,
+               'restaurant': restaurant, 'customer': customer, 'order': order}
+    return render(response, 'restaurants/updateOrder.html', context)
 
 
 @login_required(login_url='home')
@@ -37,7 +59,6 @@ def menu(response, rid):
 def resProfile(response, rid):
     profile = Restaurant.objects.get(id=rid)
     form = ProfileForm(instance=profile)
-    print(profile.username)
     context = {'form': form, 'rid': rid, 'username': profile.username}
     return render(response, 'restaurants/myProfile.html', context)
 

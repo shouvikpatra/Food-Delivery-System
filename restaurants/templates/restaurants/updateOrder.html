@@ -1,0 +1,47 @@
+{% extends 'restaurants/base.html' %}
+{% load static from static %} 
+{% block content %}
+<div class="container col-md-8">
+  <form action="{% url 'updateOrder' rid=rid oid=oid %}" method="post" >
+  <br>
+    {% csrf_token %}
+    <div class="container col-md-4 h2">Update Order Details</div>
+    <hr />
+    <h5>
+    <p>Order ID: {{order.id}}</p>
+    <p>Restaurant Name: {{restaurant.name}}</p>
+    <p>Customer Name: {{customer.name}}</p>
+    </h5>
+    <hr />
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Dish Name</th>
+          <th>Dish Price</th>
+          <th>Dish Quantity</th>
+          <th>Dish Cuisine</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in order.orderlist_set.all %}
+        <tr>
+          <td>{{d.dish.dish_name}}</td>
+          <td>{{d.dish.price}}</td>
+          <td>{{d.quantity}}</td>
+          <td>{{d.dish.cuisine}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <hr />
+    <h5>CHANGE STATUS: {{form.status}}</h5>
+    </br>
+
+    <input
+      class="btn btn-success btn-md btn-block"
+      type="submit"
+      value="UPDATE"
+    />
+  </form>
+</div>
+{% endblock %}

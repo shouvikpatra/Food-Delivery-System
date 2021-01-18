@@ -5,6 +5,8 @@ urlpatterns = [
     path('<int:rid>/', views.restaurant, name="restaurant"),
     # Order URLs
     path('<int:rid>/myOrders/', views.resOrderPage, name="resOrderPage"),
+    path('<int:rid>/myOrders/update_order/<int:oid>/',
+         views.updateOrder, name="updateOrder"),
 
 
     # Menu URLs

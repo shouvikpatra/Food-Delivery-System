@@ -1,5 +1,6 @@
 from django.forms import ModelForm, HiddenInput
 from .models import *
+from orders.models import *
 
 
 class DishForm(ModelForm):
@@ -14,3 +15,9 @@ class ProfileForm(ModelForm):
         model = Restaurant
         fields = '__all__'
         widgets = {'id': HiddenInput()}
+
+
+class OrderForm(ModelForm):
+    class Meta:
+        model = Order
+        fields = '__all__'
