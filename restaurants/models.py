@@ -13,6 +13,7 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=1500, null=True)
     contact = models.IntegerField(null=True)
     maxActiveOrders = models.IntegerField(null=True)
+    activeOrders = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.id)

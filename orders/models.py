@@ -22,7 +22,7 @@ class Order(models.Model):
 
 class OrderList(models.Model):
     order = models.ForeignKey(
-        "Order", null=True, on_delete=models.SET_NULL)
+        "Order", null=True, on_delete=models.CASCADE)
     dish = models.ForeignKey(
         "restaurants.Menu", null=True, on_delete=models.SET_NULL)
     quantity = models.IntegerField(default=1)

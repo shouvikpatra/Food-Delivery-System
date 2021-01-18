@@ -10,7 +10,6 @@ class Customer(models.Model):
         User, on_delete=models.CASCADE)
     address = models.CharField(max_length=1500, null=True)
     contact = models.IntegerField(null=True)
-    orders = models.IntegerField(default=0)
 
 
 class Cart(models.Model):
