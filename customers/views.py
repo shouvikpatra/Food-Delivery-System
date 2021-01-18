@@ -135,6 +135,8 @@ def placeOrder(response, cid):
         restaurant = cart.first().restaurant
         order = Order(customer_id=cid, restaurant=restaurant)
         order.save()
+        restaurant.activeOrders += 1
+        restaurant.save()
         for item in cart:
             orderListItem = OrderList(
                 order=order, dish=item.dish, quantity=item.quantity)

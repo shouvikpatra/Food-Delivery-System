@@ -38,9 +38,10 @@ def updateOrder(response, rid, oid):
         order.status = response.POST['status']
         if response.POST['status'] == 'Delivered' or response.POST['status'] == 'Cancelled':
             order.order_activity = False
-            # Contraint Code
+            order.restaurant.activeOrders -= 1
         else:
             order.order_activity = True
+            order.restaurant.activeOrders += 1
         order.save()
         return redirect('resOrderPage', rid=rid)
 
@@ -57,9 +58,10 @@ def menu(response, rid):
 
 @login_required(login_url='home')
 def resProfile(response, rid):
-    profile = Restaurant.objects.get(id=rid)
-    form = ProfileForm(instance=profile)
-    context = {'form': form, 'rid': rid, 'username': profile.username}
+    restaurant = Restaurant.objects.get(id=rid)
+    form = ProfileForm(instance=restaurant)
+    context = {'form': form, 'rid': rid,
+               'username': restaurant.username, 'restaurant': restaurant}
     return render(response, 'restaurants/myProfile.html', context)
 
 
