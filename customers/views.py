@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.db.models import F
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -24,6 +25,9 @@ def customer(response, cid):
 def showRestaurants(response, cid):
     customer = Customer.objects.get(id=cid)
     restaurants = Restaurant.objects.all()
+    restaurants = Restaurant.objects.annotate(
+        order_diff=(F('maxActiveOrders')-F('activeOrders')))
+    restaurants = restaurants.filter(order_diff__gt=0)
     restaurantFilter = RestaurantFilter(response.GET, queryset=restaurants)
     restaurants = restaurantFilter.qs
 
@@ -178,7 +182,9 @@ def delete_cus_profile(response, cid):
 def cusOrderPage(response, cid):
     customer = Customer.objects.get(id=cid)
     orders = Order.objects.filter(customer_id=cid)
+    orderFilter = OrderFilter(response.GET, queryset=orders)
+    orders = orderFilter.qs
 
     context = {'cid': cid, 'customer': customer,
-               'orders': orders, }
+               'orders': orders, 'orderFilter': orderFilter, }
     return render(response, 'customers/orderPage.html', context)

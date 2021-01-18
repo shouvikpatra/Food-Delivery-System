@@ -21,6 +21,14 @@
         </li>
       </ul>
     </div>
+    <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+      <a class="btn btn-secondary ml-auto" width="50" height="50">
+        ACTIVE ORDERS </a
+      >|
+      <a class="btn btn-secondary ml-auto" width="50" height="50">
+        {{restaurant.activeOrders}}
+      </a>
+    </div>
     <button class="btn" type="button">
       <a class="btn btn-outline-success ml-auto" href="{%url 'logout'%}">
         Logout
