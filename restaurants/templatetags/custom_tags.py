@@ -1,5 +1,5 @@
 from django import template
-from ..models import *
+from customers.models import *
 
 
 register = template.Library()

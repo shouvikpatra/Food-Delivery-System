@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from orders.models import *
 from .models import *
-from .forms import DishForm, ProfileForm
+from .forms import *
 
 
 # Create your views here.
@@ -11,7 +12,9 @@ from .forms import DishForm, ProfileForm
 @login_required(login_url='home')
 def restaurant(response, rid):
     restaurant = Restaurant.objects.get(id=rid)
-    context = {'rid': rid, 'restaurant': restaurant}
+    orders = Order.objects.filter(restaurant_id=rid, order_activity=True)
+    context = {'rid': rid, 'restaurant': restaurant,
+               'orders': orders, }
     return render(response, 'restaurants/restaurant.html', context)
 
 

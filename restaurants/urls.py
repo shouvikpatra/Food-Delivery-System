@@ -20,5 +20,8 @@ urlpatterns = [
     path('<int:rid>/myProfile/delete',
          views.delete_res_profile, name="delete_res_profile"),
 
+    # Order URLs
+
+
 
 ]
