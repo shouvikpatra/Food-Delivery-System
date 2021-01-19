@@ -38,16 +38,13 @@ def showRestaurants(response, cid):
 
 @login_required(login_url='home')
 def orderMenu(response, cid, rid):
-    cart = Cart.objects.filter(customer_id=cid)
     dishes = []
-    for c in cart:
-        dishes = Menu.objects.get(id=c.dish.id)
     restaurant = Restaurant.objects.get(id=rid)
     menu = Menu.objects.filter(res_id=restaurant, availability=True)
     menuFilter = MenuFilter(response.GET, queryset=menu)
     menu = menuFilter.qs
     context = {'cid': cid, 'restaurant': restaurant,
-               'menu': menu, 'menuFilter': menuFilter, 'rid': rid, 'cart': dishes}
+               'menu': menu, 'menuFilter': menuFilter, 'rid': rid, }
     return render(response, 'customers/orderMenu.html', context)
 
 

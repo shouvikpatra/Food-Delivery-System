@@ -1,5 +1,5 @@
 from django import template
-from ..models import Cart
+from ..models import *
 
 
 register = template.Library()
@@ -21,9 +21,9 @@ def totalprice(orders):
 
 @register.simple_tag
 def isAlreadyInCart(dish, cid):
-    item = Cart.objects.get(dish_id=dish)
-    #item = 0
+
+    item = Cart.objects.get(dish_id=dish, customer_id=cid)
     if item:
-        return item.quantity
-        # return item
-    return False
+        return True
+    else:
+        return False

@@ -38,11 +38,13 @@ def updateOrder(response, rid, oid):
         order.status = response.POST['status']
         if response.POST['status'] == 'Delivered' or response.POST['status'] == 'Cancelled':
             order.order_activity = False
-            order.restaurant.activeOrders -= 1
+            restaurant.activeOrders -= 1
+            print('order updated')
         else:
             order.order_activity = True
-            order.restaurant.activeOrders += 1
+            restaurant.activeOrders += 1
         order.save()
+        restaurant.save()
         return redirect('resOrderPage', rid=rid)
 
     context = {'rid': rid, 'oid': oid, 'form': form,
@@ -52,8 +54,9 @@ def updateOrder(response, rid, oid):
 
 @login_required(login_url='home')
 def menu(response, rid):
+    restaurant = Restaurant.objects.get(id=rid)
     dishes = Menu.objects.filter(res_id=rid)
-    return render(response, 'restaurants/menu.html', {'dishes': dishes, 'rid': rid})
+    return render(response, 'restaurants/menu.html', {'dishes': dishes, 'rid': rid, 'restaurant': restaurant})
 
 
 @login_required(login_url='home')
