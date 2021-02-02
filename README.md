@@ -1,5 +1,6 @@
 # Food-Delivery-System
-A simple food delivery system using Python. This Project is done using Python and Django Framework.
+A simple food delivery system using Python.
+This Project is done using Python and Django Framework.
 
 ## Setup
 * To run this project, it is recommended to have the latest version of python installed. For this instance, I have used Python 3.8.3
